@@ -12,11 +12,9 @@
 
 #include "push_swap.h"
 
-void display_operation(t_map map)
+void	display_operation(t_map map)
 {
-
-	map.counter = -1;
-	while(map.beginop)
+	while (map.beginop)
 	{
 		if (map.beginop->number == 1)
 			printf("sa\n");
@@ -35,42 +33,5 @@ void display_operation(t_map map)
 		if (map.beginop->number == 11)
 			printf("rrb\n");
 		map.beginop = map.beginop->next;
-		map.counter++;
-	}
-
-	printf("\033[1mNumber of operation %d\n", map.counter);
-
-	if (verifordre(map) == 0)
-		printf("\n\033[31mWRONG\n");
-	else
-		printf("\n\033[32mRIGHT\n");
-	printf("\033[0m\n");
-	//display(map, sizepile(map.beginA));
-
-}
-
-
-void 	display(t_map map, int size)
-{
-	char *line;
-
-	//	printf("\033[H\033[2J");
-	printf ("\033[36m================%5d     ================\033[0m\n", size);
-	while (map.beginA || map.beginB)
-	{
-		if (map.beginA)
-		{
-			printf("PILE A : \033[36m%10d\033[0m ||", map.beginA->number);
-			map.beginA = map.beginA->next;
-		}
-		else
-			printf("                    ||");
-		if (map.beginB)
-		{
-			printf(" PILE B : \033[36m%10d\033[0m\n", map.beginB->number);
-			map.beginB = map.beginB->next;
-		}
-		else
-			printf("\n");
 	}
 }

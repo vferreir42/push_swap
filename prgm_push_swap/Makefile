@@ -13,6 +13,8 @@
 NAME	=	../push_swap
 
 SRCS	=	./srcs/main.c				\
+				./srcs/parcing.c		\
+				./srcs/utils.c		\
 				./srcs/algorithm.c		\
 				./srcs/display.c	\
 				./srcs/mediane.c	\
@@ -34,7 +36,7 @@ all	:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 	@$(CC) $(OBJS) $(LIB_PATH) -o $(NAME)
-	@echo "\033[32mPUSH_SWAP COMPILATING DONE"
+	@echo "\033[32mPUSH_SWAP COMPILATING DONE\033[0m"
 
 clean	:
 	$(RM) $(OBJS)

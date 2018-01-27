@@ -26,17 +26,17 @@ t_lst	*newmaillon(int receipt)
 void verification(t_map map)
 {
 	int number;
-	while (map.beginA)
+	while (map.begin_a)
 	{
-		number = map.beginA->number;
-		map.beginA = map.beginA->next;
-		if (map.beginA && number > map.beginA->number)
+		number = map.begin_a->number;
+		map.begin_a = map.begin_a->next;
+		if (map.begin_a && number > map.begin_a->number)
 		{
 			write(1, "KO\n", 3);
 			return ;
 		}
 	}
-	if (map.beginB)
+	if (map.begin_b)
 	{
 		write(1, "KO\n", 3);
 		return ;
@@ -52,26 +52,47 @@ void read_operation(t_map *map)
 	{
 		if (ft_strcmp(line, "sa") == 0)
 			swap_a(map);
-		if (ft_strcmp(line, "sb") == 0)
+		else if (ft_strcmp(line, "sb") == 0)
 			swap_b(map);
-		if (ft_strcmp(line, "ss") == 0)
+		else if (ft_strcmp(line, "ss") == 0)
 			swap_ss(map);
-		if (ft_strcmp(line, "pa") == 0)
+		else if (ft_strcmp(line, "pa") == 0)
 			push_a(map);
-		if (ft_strcmp(line, "pb") == 0)
+		else if (ft_strcmp(line, "pb") == 0)
 			push_b(map);
-		if (ft_strcmp(line, "ra") == 0)
+		else if (ft_strcmp(line, "ra") == 0)
 			rotate_a(map);
-		if (ft_strcmp(line, "rb") == 0)
+		else if (ft_strcmp(line, "rb") == 0)
 			rotate_b(map);
-		if (ft_strcmp(line, "rr") == 0)
+		else if (ft_strcmp(line, "rr") == 0)
 			rotate_ss(map);
-		if (ft_strcmp(line, "rra") == 0)
+		else if (ft_strcmp(line, "rra") == 0)
 			reverse_a(map);
-		if (ft_strcmp(line, "rrb") == 0)
+		else if (ft_strcmp(line, "rrb") == 0)
 			reverse_b(map);
-		if (ft_strcmp(line, "rrr") == 0)
+		else if (ft_strcmp(line, "rrr") == 0)
 			reverse_ss(map);
+		else
+		{
+			printf("Error\n");
+			exit (0);
+		}
+	}
+}
+
+void put_argv_in_list(t_map *map, char **argv, int i)
+{
+	t_lst *next;
+
+	parcing_size_int(ft_atoi(argv[i]));
+	next = newmaillon(ft_atoi(argv[i]));
+	next->gris = 0;
+	map->begin_a = next;
+	while (argv[++i])
+	{
+		next->next = newmaillon(ft_atoi(argv[i]));
+		next = next->next;
+		next->gris = 0;
 	}
 }
 
@@ -82,15 +103,16 @@ int main(int argc, char **argv)
 	t_map map;
 
 	if (argc == 1)
-		return (0);
+		exit (0);
 	i = 1;
-	next = newmaillon(ft_atoi(argv[1]));
-	map.beginA = next;
-	while (argv[++i])
+	if (ft_strchr(argv[1], ' ') != NULL && argv[2] == NULL)
 	{
-		next->next = newmaillon(ft_atoi(argv[i]));
-		next = next->next;
+		i = 0;
+		argv = ft_strsplit(argv[1], ' ');
 	}
+	parcing_argv(argv);
+	put_argv_in_list(&map, argv, i);
+	parcing_not_same_number(map);
 	read_operation(&map);
 	verification(map);
 }

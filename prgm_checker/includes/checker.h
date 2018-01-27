@@ -20,18 +20,23 @@
 typedef struct	s_lst
 {
 	int				number;
+	int				gris;
 	struct s_lst	*next;
 }				t_lst;
 
 typedef struct	s_map
 {
-	t_lst			*beginA;
-	t_lst			*beginB;
+	t_lst			*begin_a;
+	t_lst			*begin_b;
 	t_lst			*beginop;
 	t_lst			*operation;
 	int				counter;
 	int				med;
 }				t_map;
+
+void parcing_argv(char **argv);
+void parcing_not_same_number(t_map map);
+void parcing_size_int(long int nb);
 
 int				sort_pile_a(t_map *map, t_lst *begin, int size);
 int				sort_pile_b(t_map *map, t_lst *begin, int size);

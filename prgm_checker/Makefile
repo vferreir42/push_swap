@@ -13,6 +13,7 @@
 NAME	=	../checker
 
 SRCS	=	./srcs/main.c				\
+				./srcs/parcing.c	\
 				./srcs/operator.c	\
 				../get_next_line/get_next_line.c
 
@@ -30,7 +31,7 @@ all	:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 	@$(CC) $(OBJS) $(LIB_PATH) -o $(NAME)
-	@echo "\033[32mCHECKER COMPILATING DONE"
+	@echo "\033[32mCHECKER COMPILATING DONE\033[0m"
 
 clean	:
 	$(RM) $(OBJS)

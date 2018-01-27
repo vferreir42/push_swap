@@ -20,20 +20,18 @@ int	recursive_a(t_map *map, int size)
 
 	sauvsize = size;
 	if (size <= 3)
-		return (sort_pile_a(map, map->beginA, size));
-	map->med = mediane(map->beginA, size / 2);
+		return (sort_pile_a(map, map->begin_a, size));
+	map->med = mediane(map->begin_a, size / 2);
 	countpush = 0;
 	countrotate = 0;
 	while (sauvsize-- > 0)
-		if (map->beginA->number <= map->med && ++countpush)
+		if (map->begin_a->number <= map->med && ++countpush)
 			push_b(map);
 		else if (++countrotate)
 			rotate_a(map);
 	if (verifordre(*map) == 1)
-	{
 		while (countrotate-- > 0)
 			reverse_a(map);
-	}
 	recursive_a(map, size - countpush);
 	recursive_b(map, countpush);
 	while (countpush-- > 0)
@@ -49,12 +47,12 @@ int	recursive_b(t_map *map, int size)
 
 	sauvsize = size;
 	if (size <= 3)
-		return (sort_pile_b(map, map->beginB, size));
-	map->med = mediane(map->beginB, size / 2);
+		return (sort_pile_b(map, map->begin_b, size));
+	map->med = mediane(map->begin_b, size / 2);
 	countpush = 0;
 	countrotate = 0;
 	while (sauvsize-- > 0)
-		if (map->beginB->number > map->med && ++countpush)
+		if (map->begin_b->number > map->med && ++countpush)
 			push_a(map);
 		else if (++countrotate)
 			rotate_b(map);
