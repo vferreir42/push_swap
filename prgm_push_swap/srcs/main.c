@@ -74,5 +74,11 @@ int		main(int argc, char **argv)
 	recursive_a(&map, sizepile(map.begin_a));
 	reduct_operation(&map);
 	display_operation(map);
+
+	/*while (map.begin_a)
+	{
+		printf("%d\n", map.begin_a->number);
+		map.begin_a = map.begin_a->next;
+	}*/
 	return (0);
 }

@@ -15,11 +15,14 @@ NAME	=	../checker
 SRCS	=	./srcs/main.c				\
 				./srcs/parcing.c	\
 				./srcs/operator.c	\
+				./srcs/operator2.c	\
+				./srcs/operator3.c	\
+				./srcs/utils.c		\
 				../get_next_line/get_next_line.c
 
 OBJS	=	$(SRCS:.c=.o)
 
-CC	=	@gcc -g3 -fsanitize=address
+CC	=	@gcc -Wall -Werror -Wextra
 
 CFLAGS	=	-I ../libft/includes -I ./includes -I ../get_next_line
 

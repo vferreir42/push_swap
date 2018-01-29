@@ -6,47 +6,15 @@
 /*   By: vferreir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 18:34:25 by vferreir          #+#    #+#             */
-/*   Updated: 2018/01/11 18:34:26 by vferreir         ###   ########.fr       */
+/*   Updated: 2018/01/29 19:30:56 by vferreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-t_lst	*newmaillon(int receipt)
+void	read_operation(t_map *map)
 {
-	t_lst	*ptr;
-
-	if (!(ptr = malloc(sizeof(t_lst))))
-		return (NULL);
-	ptr->number = receipt;
-	ptr->next = NULL;
-	return (ptr);
-}
-
-void verification(t_map map)
-{
-	int number;
-	while (map.begin_a)
-	{
-		number = map.begin_a->number;
-		map.begin_a = map.begin_a->next;
-		if (map.begin_a && number > map.begin_a->number)
-		{
-			write(1, "KO\n", 3);
-			return ;
-		}
-	}
-	if (map.begin_b)
-	{
-		write(1, "KO\n", 3);
-		return ;
-	}
-	write (1, "OK\n", 3);
-}
-
-void read_operation(t_map *map)
-{
-	char *line;
+	char	*line;
 
 	while (get_next_line(0, &line) > 0)
 	{
@@ -74,16 +42,20 @@ void read_operation(t_map *map)
 			reverse_ss(map);
 		else
 		{
-			printf("Error\n");
-			exit (0);
+			write(1, "Error\n", 6);
+			free(line);
+			exit(0);
 		}
+		free(line);
 	}
+	free(line);
 }
 
-void put_argv_in_list(t_map *map, char **argv, int i)
+void	put_argv_in_list(t_map *map, char **argv, int i)
 {
-	t_lst *next;
+	t_lst	*next;
 
+	next = NULL;
 	parcing_size_int(ft_atoi(argv[i]));
 	next = newmaillon(ft_atoi(argv[i]));
 	next->gris = 0;
@@ -96,23 +68,29 @@ void put_argv_in_list(t_map *map, char **argv, int i)
 	}
 }
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	int i;
-	t_lst *next;
-	t_map map;
+	char	**new;
+	t_map	map;
 
+	new = NULL;
 	if (argc == 1)
-		exit (0);
-	i = 1;
+		exit(0);
 	if (ft_strchr(argv[1], ' ') != NULL && argv[2] == NULL)
 	{
-		i = 0;
-		argv = ft_strsplit(argv[1], ' ');
+		new = ft_strsplit(argv[1], ' ');
+		parcing_argv(new);
+		put_argv_in_list(&map, new, 0);
 	}
-	parcing_argv(argv);
-	put_argv_in_list(&map, argv, i);
+	else
+	{
+		parcing_argv(argv);
+		put_argv_in_list(&map, argv, 1);
+	}
 	parcing_not_same_number(map);
 	read_operation(&map);
 	verification(map);
+	free_list(&map);
+	if (new)
+		del_tab(&new);
 }
