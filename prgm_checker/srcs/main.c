@@ -71,6 +71,7 @@ void	put_argv_in_list(t_map *map, char **argv, int i)
 	map->begin_a = next;
 	while (argv[++i])
 	{
+		parcing_size_int(ft_atoi(argv[i]));
 		next->next = newmaillon(ft_atoi(argv[i]));
 		next = next->next;
 		next->gris = 0;
