@@ -14,17 +14,18 @@ NAME	=	../push_swap
 
 SRCS	=	./srcs/main.c				\
 				./srcs/parcing.c		\
-				./srcs/utils.c		\
-				./srcs/algorithm.c		\
-				./srcs/display.c	\
-				./srcs/mediane.c	\
-				./srcs/operator.c	\
-				./srcs/sort_a.c	\
+				./srcs/utils.c			\
+				./srcs/algorithm.c	\
+				./srcs/display.c		\
+				./srcs/mediane.c		\
+				./srcs/operator.c		\
+				./srcs/operator2.c	\
+				./srcs/sort_a.c			\
 				./srcs/sort_b.c
 
 OBJS	=	$(SRCS:.c=.o)
 
-CC	=	@gcc -g3 -fsanitize=address
+CC	=	@gcc -Wall -Werror -Wextra
 
 CFLAGS	=	-I ../libft/includes -I ./includes
 

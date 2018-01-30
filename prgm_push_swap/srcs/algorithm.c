@@ -20,7 +20,7 @@ int	recursive_a(t_map *map, int size)
 
 	sauvsize = size;
 	if (size <= 3)
-		return (sort_pile_a(map, map->begin_a, size));
+		return (sort_pile_a(map, map->begin_a));
 	map->med = mediane(map->begin_a, size / 2);
 	countpush = 0;
 	countrotate = 0;
@@ -47,7 +47,7 @@ int	recursive_b(t_map *map, int size)
 
 	sauvsize = size;
 	if (size <= 3)
-		return (sort_pile_b(map, map->begin_b, size));
+		return (sort_pile_b(map, map->begin_b));
 	map->med = mediane(map->begin_b, size / 2);
 	countpush = 0;
 	countrotate = 0;

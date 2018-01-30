@@ -6,7 +6,7 @@
 /*   By: vferreir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 13:40:56 by vferreir          #+#    #+#             */
-/*   Updated: 2017/12/26 13:03:09 by vferreir         ###   ########.fr       */
+/*   Updated: 2018/01/30 15:14:50 by vferreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char				*ft_strstr(const char *str, const char *aiguille);
 char				*ft_strnstr(const char *str, const char *aig, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-long int					ft_atoi(const char *nptr);
+long int			ft_atoi(const char *nptr);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);

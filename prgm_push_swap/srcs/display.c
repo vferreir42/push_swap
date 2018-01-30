@@ -17,21 +17,21 @@ void	display_operation(t_map map)
 	while (map.beginop)
 	{
 		if (map.beginop->number == 1)
-			printf("sa\n");
+			write(1, "sa\n", 3);
 		if (map.beginop->number == 2)
-			printf("sb\n");
+			write(1, "sb\n", 3);
 		if (map.beginop->number == 4)
-			printf("pa\n");
+			write(1, "pa\n", 3);
 		if (map.beginop->number == 5)
-			printf("pb\n");
+			write(1, "pb\n", 3);
 		if (map.beginop->number == 7)
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		if (map.beginop->number == 8)
-			printf("rb\n");
+			write(1, "rb\n", 3);
 		if (map.beginop->number == 10)
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		if (map.beginop->number == 11)
-			printf("rrb\n");
+			write(1, "rrb\n", 4);
 		map.beginop = map.beginop->next;
 	}
 }

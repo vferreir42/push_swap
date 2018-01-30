@@ -12,35 +12,44 @@
 
 #include "checker.h"
 
+int		read_operation_suite(t_map *map, char *line)
+{
+	if (ft_strcmp(line, "sa") == 0)
+		swap_a(map);
+	else if (ft_strcmp(line, "sb") == 0)
+		swap_b(map);
+	else if (ft_strcmp(line, "ss") == 0)
+		swap_ss(map);
+	else if (ft_strcmp(line, "pa") == 0)
+		push_a(map);
+	else if (ft_strcmp(line, "pb") == 0)
+		push_b(map);
+	else if (ft_strcmp(line, "ra") == 0)
+		rotate_a(map);
+	else if (ft_strcmp(line, "rb") == 0)
+		rotate_b(map);
+	else if (ft_strcmp(line, "rr") == 0)
+		rotate_ss(map);
+	else if (ft_strcmp(line, "rra") == 0)
+		reverse_a(map);
+	else if (ft_strcmp(line, "rrb") == 0)
+		reverse_b(map);
+	else if (ft_strcmp(line, "rrr") == 0)
+		reverse_ss(map);
+	else
+		return (0);
+	return (1);
+}
+
 void	read_operation(t_map *map)
 {
 	char	*line;
+	int		i;
 
 	while (get_next_line(0, &line) > 0)
 	{
-		if (ft_strcmp(line, "sa") == 0)
-			swap_a(map);
-		else if (ft_strcmp(line, "sb") == 0)
-			swap_b(map);
-		else if (ft_strcmp(line, "ss") == 0)
-			swap_ss(map);
-		else if (ft_strcmp(line, "pa") == 0)
-			push_a(map);
-		else if (ft_strcmp(line, "pb") == 0)
-			push_b(map);
-		else if (ft_strcmp(line, "ra") == 0)
-			rotate_a(map);
-		else if (ft_strcmp(line, "rb") == 0)
-			rotate_b(map);
-		else if (ft_strcmp(line, "rr") == 0)
-			rotate_ss(map);
-		else if (ft_strcmp(line, "rra") == 0)
-			reverse_a(map);
-		else if (ft_strcmp(line, "rrb") == 0)
-			reverse_b(map);
-		else if (ft_strcmp(line, "rrr") == 0)
-			reverse_ss(map);
-		else
+		i = read_operation_suite(map, line);
+		if (i == 0)
 		{
 			write(1, "Error\n", 6);
 			free(line);

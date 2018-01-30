@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	put_in_tab(t_map *map, t_lst *begin, long int *tab)
+static void	put_in_tab(t_lst *begin, long int *tab)
 {
 	int			i;
 
@@ -92,11 +92,11 @@ static void	suite_sort_pile_a_2(t_map *map, long int *tab)
 		swap_a(map);
 }
 
-int			sort_pile_a(t_map *map, t_lst *begin, int size)
+int			sort_pile_a(t_map *map, t_lst *begin)
 {
 	long int	tab[4];
 
-	put_in_tab(map, begin, tab);
+	put_in_tab(begin, tab);
 	if (tab[1] == 3000000000 || tab[2] == 3000000000)
 	{
 		if (tab[1] != 3000000000 && tab[0] > tab[1])

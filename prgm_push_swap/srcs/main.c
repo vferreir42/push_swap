@@ -6,7 +6,7 @@
 /*   By: vferreir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 12:09:56 by vferreir          #+#    #+#             */
-/*   Updated: 2018/01/27 19:25:43 by vferreir         ###   ########.fr       */
+/*   Updated: 2018/01/30 15:01:08 by vferreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	reduct_operation(t_map *map)
 {
 	t_lst	*next;
+	t_lst	*tmp;
 
 	next = map->beginop;
 	while (next)
@@ -28,7 +29,12 @@ void	reduct_operation(t_map *map)
 				|| (next->next->number == 5 && next->next->next->number == 4)))
 		{
 			if (next->next->next->next)
+			{
+				tmp = next->next;
 				next->next = next->next->next->next;
+				free(tmp->next);
+				free(tmp);
+			}
 			next = map->beginop;
 		}
 		next = next->next;
@@ -39,6 +45,7 @@ void	put_argv_in_list(t_map *map, char **argv, int i)
 {
 	t_lst	*next;
 
+	parcing_argv(argv);
 	parcing_size_int(ft_atoi(argv[i]));
 	next = newmaillon(ft_atoi(argv[i]));
 	next->gris = 0;
@@ -53,19 +60,19 @@ void	put_argv_in_list(t_map *map, char **argv, int i)
 
 int		main(int argc, char **argv)
 {
-	int		i;
+	char	**new;
 	t_map	map;
 
+	new = NULL;
 	if (argc == 1)
 		exit(0);
-	i = 1;
 	if (ft_strchr(argv[1], ' ') != NULL && argv[2] == NULL)
 	{
-		i = 0;
-		argv = ft_strsplit(argv[1], ' ');
+		new = ft_strsplit(argv[1], ' ');
+		put_argv_in_list(&map, new, 0);
 	}
-	parcing_argv(argv);
-	put_argv_in_list(&map, argv, i);
+	else
+		put_argv_in_list(&map, argv, 1);
 	parcing_not_same_number(map);
 	if (verifordre(map) == 1)
 		exit(0);
@@ -74,11 +81,8 @@ int		main(int argc, char **argv)
 	recursive_a(&map, sizepile(map.begin_a));
 	reduct_operation(&map);
 	display_operation(map);
-
-	/*while (map.begin_a)
-	{
-		printf("%d\n", map.begin_a->number);
-		map.begin_a = map.begin_a->next;
-	}*/
+	free_list(&map);
+	if (new)
+		del_tab(&new);
 	return (0);
 }

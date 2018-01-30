@@ -25,7 +25,7 @@ void	parcing_argv(char **argv)
 		{
 			if (ft_isdigit(argv[i][t]) != 1 && argv[i][t] != '-')
 			{
-				printf("Error\n");
+				write(1, "Error\n", 6);
 				exit(0);
 			}
 			t++;
@@ -48,7 +48,7 @@ void	parcing_not_same_number(t_map map)
 		{
 			if (begin->number == next->number && next->gris == 0)
 			{
-				printf("Error\n");
+				write(1, "Error\n", 6);
 				exit(0);
 			}
 			next = next->next;
@@ -62,7 +62,7 @@ void	parcing_size_int(long int nb)
 {
 	if (nb > 2147483647 || nb < -2147483648)
 	{
-		printf("Error\n");
+		write(1, "Error\n", 6);
 		exit(0);
 	}
 }

@@ -13,11 +13,11 @@
 NAME	=	../checker
 
 SRCS	=	./srcs/main.c				\
-				./srcs/parcing.c	\
-				./srcs/operator.c	\
+				./srcs/parcing.c		\
+				./srcs/operator.c		\
 				./srcs/operator2.c	\
 				./srcs/operator3.c	\
-				./srcs/utils.c		\
+				./srcs/utils.c			\
 				../get_next_line/get_next_line.c
 
 OBJS	=	$(SRCS:.c=.o)
