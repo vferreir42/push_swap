@@ -59,6 +59,39 @@ void	put_argv_in_list(t_map *map, char **argv, int i)
 	}
 }
 
+void	cas_part(t_map *map)
+{
+	int i;
+
+	map->med = mediane(map->begin_a, 6 / 2);
+	i = 0;
+	while (i < 5)
+	{
+		if (map->begin_a->number > map->med)
+			rotate_a(map);
+		else
+			push_b(map);
+		i++;
+	}
+	sort_pile_a(map, map->begin_a);
+	sort_pile_b(map, map->begin_b);
+	push_a(map);
+	push_a(map);
+}
+
+void	main_suite(t_map *map)
+{
+	if (sizepile(map->begin_a) == 5)
+		cas_part(map);
+	else
+	{
+		recursive_a(map, sizepile(map->begin_a));
+		reduct_operation(map);
+	}
+	display_operation(*map);
+	free_list(map);
+}
+
 int		main(int argc, char **argv)
 {
 	char	**new;
@@ -79,10 +112,7 @@ int		main(int argc, char **argv)
 		exit(0);
 	map.operation = newmaillon(0);
 	map.beginop = map.operation;
-	recursive_a(&map, sizepile(map.begin_a));
-	reduct_operation(&map);
-	display_operation(map);
-	free_list(&map);
+	main_suite(&map);
 	if (new)
 		del_tab(&new);
 	return (0);
